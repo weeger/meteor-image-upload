@@ -10,18 +10,18 @@ Use it into your own form event to fill up the Id fields with images IDs.
 
     Template.hello.events({
         'change input[type=file]': function (event) {
-
+    
           var file = event.currentTarget.files[0];
-
+    
           // This example will generate 5 files from uploaded file,
           // using different crop / resize method.
           // And it will upload it tu the database,
           // clearing old files if exists,
           // and populate saved IDs into form fields, ready to be saved.
           Meteor.wImageManager
-
+    
               .reset()
-
+    
               // Remove all already uploaded images, if exists.
               .collectionRemove('ImagesCollection', [
                 document.getElementById('fieldFull').value,
@@ -30,7 +30,7 @@ Use it into your own form event to fill up the Id fields with images IDs.
                 document.getElementById('fieldResized').value,
                 document.getElementById('fieldMax').value
               ])
-
+    
               // Load image for processing.
               .load(file)
               // Display image into a dom (as base64 src)
@@ -42,30 +42,35 @@ Use it into your own form event to fill up the Id fields with images IDs.
                 // Continue with the same canvas element.
                 this.next(canvas);
               })
-
-              // Now we will use a grouped upload method using store().
-
+    
+              .then(function(canvas) {
+                // Execute custom action when you want.
+                console.log('Now we will use a grouped upload method using store()');
+                // And continue operations.
+                this.next(canvas);
+              })
+    
               // Crop.
               .crop(200, 200)
               // Display image into a dom (as base64 src)
               .display(document.getElementById('previewCrop'))
               // Second upload method, store image before upload.
               .store('demoImage', 'crop', 'Blob')
-
+    
               // Crop ratio.
               .cropRatio(1.8)
               // Display.
               .display(document.getElementById('previewCropRatio'))
               // Second upload method, store image before upload.
               .store('demoImage', 'cropRatio', 'Blob')
-
+    
               // Resize.
               .resize(200, 200)
               // Display.
               .display(document.getElementById('previewResized'))
               // Store.
               .store('demoImage', 'resized', 'Blob')
-
+    
               // Use again original image
               .load(file)
               // Create a thumb
@@ -74,7 +79,7 @@ Use it into your own form event to fill up the Id fields with images IDs.
               .display(document.getElementById('previewMax'))
               // Store.
               .store('demoImage', 'max', 'Blob')
-
+    
               // Upload all storage.
               .collectionInsertStore('demoImage', 'ImagesCollection', function (result) {
                 // Populate fields.
@@ -83,7 +88,7 @@ Use it into your own form event to fill up the Id fields with images IDs.
                 document.getElementById('fieldResized').value = result.resized._id;
                 document.getElementById('fieldMax').value = result.max._id;
               })
-
+    
               // Required to launch process.
               .next();
         }
