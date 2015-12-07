@@ -2,7 +2,7 @@ Package.describe({
   name: 'weeger:image-upload',
   version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary: 'A simple image upload manager, allowing to resize, crop, generate thumbnails client side, and manage reference ids for insert or deletion',
+  summary: 'Simple image upload manager with client side thumbnails (crop / resize), add and deletion',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/weeger/meteor-image-upload',
   // By default, Meteor will default to using README.md for documentation.
