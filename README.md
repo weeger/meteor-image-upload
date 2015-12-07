@@ -2,6 +2,8 @@ Introduction
 ============
 This package aim to bring a simple way to manage images upload with reference ID and custom client side resize or crop managment. It works with meteor collections, simpleshema and file uploads.
 
+Demo at http://image-uploader.meteor.com
+
 Usage
 -----
 Install `meteor add weeger:image-upload`.
@@ -43,12 +45,14 @@ Use it into your own form event to fill up the Id fields with images IDs.
                 this.next(canvas);
               })
     
-              .then(function(canvas) {
+              .then(function (canvas) {
                 // Execute custom action when you want.
-                console.log('Now we will use a grouped upload method using store()');
-                // And continue operations.
+                console.log('First image has been uploaded');
+                // And continue operations with the same canvas.
                 this.next(canvas);
               })
+    
+              // Now we will use a grouped upload method using store().
     
               // Crop.
               .crop(200, 200)
@@ -92,7 +96,7 @@ Use it into your own form event to fill up the Id fields with images IDs.
               // Required to launch process.
               .next();
         }
-      });
+    });
 
 
 
