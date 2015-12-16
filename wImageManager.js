@@ -174,7 +174,11 @@ Meteor.wImageManager = (function (context) {
         else {
           cropWidth = cropHeight * ratio;
         }
-        this.crop(cropWidth, cropHeight, x, y, image).next();
+        this.crop(cropWidth, cropHeight,
+            // If not defined, center crop.
+            x || (image.width - cropWidth) / 2,
+            y || (image.height - cropHeight) / 2,
+            image).next();
       });
       // Chained operations.
       return this;

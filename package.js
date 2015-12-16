@@ -1,6 +1,6 @@
 Package.describe({
   name: 'weeger:image-upload',
-  version: '0.0.1',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: 'Simple image upload manager with client side thumbnails (crop / resize), add and deletion',
   // URL to the Git repository containing the source code for this package.
